@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+  letter-spacing: 1.5px;
+}
+
+html, body {
+  height: 100%;
+  padding: 20px 100px;
+
+  @media(max-width: 1024px) {
+    padding: 20px 30px;
+  }
+
+  @media(max-width: 480px) {
+    padding: 20px 5px;
+  }
+}
