@@ -4,13 +4,26 @@
 
 html, body {
   height: 100%;
-  padding: 20px 100px;
+  padding: 0;
+}
 
-  @media(max-width: 1024px) {
-    padding: 20px 30px;
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.container {
+  margin: 40px 20%;
+  @media (max-width: 1200px) {
+    display: block;
+    margin: auto 20%;
   }
 
-  @media(max-width: 480px) {
-    padding: 20px 5px;
+  @media (max-width: 960px) {
+    margin: auto 10%;
+  }
+
+  @media (max-width: 480px) {
+    margin: auto;
   }
 }

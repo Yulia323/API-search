@@ -1,11 +1,8 @@
 .humidityChart {
   display: block;
   margin-top: 20px;
-  width: 500px
-}
-
-@media (max-width: 480px) {
-  .humidityChart {
-    width: 360px;
+  width: 550px;
+  @media (max-width: 700px) {
+    width: 100% !important;
   }
 }

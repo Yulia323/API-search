@@ -1,12 +1,14 @@
-export interface LocationResponse {
-  ip: string;
-  city: string;
-  country: string;
-  success: boolean;
-}
-
-export interface IpResponse {
-  ip: string;
-  country: string;
-  'geo-ip': string;
+export interface WeatherReport {
+  main: {
+    temp: number,
+    humidity: number
+  }
+  weather: {
+    main: string,
+    icon: string
+  }[]
+  wind: {
+    speed: number
+  }
+  dt_txt: string
 }

@@ -1,40 +1,50 @@
-<div>
-  <form [formGroup]="form" (submit)="addUrl()">
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>IP address</mat-label>
-      <input type="text" matInput formControlName="ip">
-    </mat-form-field>
-    <button class="btn" mat-raised-button color="primary" [disabled]="isFetching">ADD</button>
-  </form>
-  <ul>
-    <li *ngIf="ip.hasError('invalidIp') && ip.value">Invalid IP address</li>
-    <li *ngIf="ip.hasError('isExists') && ip.value">This IP address already exists</li>
-  </ul>
+<div class="container">
+  <div class="adaptiveStyle flex-between">
+    <div class="mainBlock" [ngClass]="dayOrNight()">
+      <div class="mainBlock-information flex-between">
+        <div>
+          <p>{{currentWeatherInfo.name}}</p>
+          <p class="today">{{currentWeatherInfo.dt_txt | date}}</p>
+          <div class="weatherData">
+            <p class="temp">Temp: {{calculateTemp(currentWeatherInfo.main.temp)}}&deg;</p>
+            <p>Humidity: {{currentWeatherInfo.main.humidity}}</p>
+            <p>Weather: {{currentWeatherInfo.weather[0].main}}</p>
+            <p>Wind: {{currentWeatherInfo.wind.speed}}</p>
+          </div>
+        </div>
+        <form class="search-form">
+          <input class="search" (keydown.enter)="search()" [(ngModel)]="searchInput"
+                 [ngModelOptions]="{standalone: true}" matInput placeholder="Search" [disabled]="isFetching">
+          <button class="btn" mat-raised-button color="primary" [disabled]="isFetching" (click)="search()">Request
+          </button>
+          <ul>
+            <li class="mat-error" *ngIf="searchInput === lastSearch && searchInput">Query is equal</li>
+          </ul>
+        </form>
+      </div>
+      <p class="mainBlock-forecastToday">Weather all day:</p>
+      <div class="mainBlock-weatherWidget flex-between">
+        <div class="mainBlock-weatherWidget-item" *ngFor="let day of findCurrentDay()">
+          <div>{{day.dt_txt | date:'shortTime'}}</div>
+          <div class="temp">{{calculateTemp(day.main.temp)}}&deg;</div>
+          <img [src]="'assets/icon/'+day.weather[0].icon+'.png'" alt="">
+        </div>
+      </div>
+    </div>
 
-  <table mat-table [dataSource]="urls.reverse()" class="mat-elevation-z8 table">
-
-    <ng-container matColumnDef="ip">
-      <th mat-header-cell *matHeaderCellDef>Url</th>
-      <td mat-cell *matCellDef="let url"> {{url.ip}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="country">
-      <th mat-header-cell *matHeaderCellDef>Country</th>
-      <td mat-cell *matCellDef="let url"> {{url.country}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="city">
-      <th mat-header-cell *matHeaderCellDef>City</th>
-      <td mat-cell *matCellDef="let url"> {{url.city}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="delete">
-      <th mat-header-cell *matHeaderCellDef></th>
-      <td mat-cell *matCellDef="let url"> <mat-icon (click)="deleteUrl(url.ip)">delete</mat-icon></td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-
+    <div class="weeklyBlock">
+      <p class="forecast">Forecast</p>
+      <div class="forecast-title flex-between">
+        <span>Date</span>
+        <span>Temp</span>
+        <span>Weather</span>
+      </div>
+      <div (click)="changeDay(day[0])" *ngFor="let day of weekWeatherInfo" class="anotherDay flex-between">
+        <span>{{day[0].dt_txt | date }}</span>
+        <span class="temp">{{calculateTemp(day[0].main.temp)}}&deg;</span>
+        <span><img [src]="'assets/icon/'+day[0].weather[0].icon+'.png'" alt=""></span>
+      </div>
+    </div>
+  </div>
+  <app-chart [weekWeather]="weekWeatherInfo"></app-chart>
 </div>

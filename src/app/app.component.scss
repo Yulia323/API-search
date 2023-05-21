@@ -1,39 +1,147 @@
-.table {
-  width: 100%;
-  border: none;
-  margin-bottom: 20px;
+.day {
+  background: center / contain no-repeat url('../assets/images/day.jpg');
+  background-size: 100% 100%;
+}
+
+.night {
+  background: center / contain no-repeat url("../assets/images/night.jpg");
+  background-size: 100% 100%;
+}
+
+.mainBlock {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  width: 60%;
+  height: 320px;
+  border-radius: 15px;
+  padding: 20px;
+  font-size: 18px;
+  box-shadow: 5px 0 13px -5px #939cb0;
+
+  &-information {
+    flex-grow: 1;
+    border-bottom: 1px solid rgba(255, 255, 255, .3);
+
+    .btn {
+      float: right;
+      margin-top: 15px;
+    }
+  }
+
+  &-weatherWidget-item {
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+
+    img {
+      width: 40px;
+    }
+  }
+
+  &-forecastToday {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+}
+
+.weeklyBlock {
+  width: 30%;
+  height: 340px;
+  padding: 10px;
+  border-radius: 15px;
+  box-shadow: 5px 0 13px -5px #939cb0;
+}
+
+.today {
+  opacity: .7;
+}
+
+.forecast {
+  font-weight: 700;
+  font-size: 20px;
+  color: #222426;
+
+  &-title {
+    span {
+      width: 33%;
+      text-align: center;
+    }
+  }
+}
+
+.anotherDay {
+  border-radius: 8px;
+  color: #939cb0;
+  padding: 0 5px;
+  height: 45px;
   align-items: center;
-  justify-content: center;
+  cursor: pointer;
 
-  mat-icon {
-    cursor: pointer;
-    float: right;
-    margin-right: 20px;
+  span {
+    width: 33%;
+    text-align: center;
+
+    img {
+      width: 50px;
+    }
   }
 }
 
-ul {
-  height: 21px;
-
-  li {
-    color: red;
-  }
+.anotherDay:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, .12), 0 0 1px 1px rgba(0, 0, 0, .08);
 }
 
-.example-form {
-  min-width: 150px;
-  max-width: 500px;
+.search {
+  padding-left: 10px;
   width: 100%;
+  float: right;
+  outline: none;
+  border: none;
+  border-radius: 3px;
+  height: 35px;
+  opacity: 0.8;
 }
 
-.example-full-width {
-  width: 100%;
-  margin-bottom: 20px;
+.search:focus {
+  opacity: 0.9;
 }
 
-.btn {
+.weatherData {
+  margin-top: 30px;
   font-size: 14px;
-  display: block;
-  width: 50%;
-  margin: 0 auto;
+
+  .temp {
+    font-size: 20px;
+    font-weight: 600;
+  }
+}
+
+@media (max-width: 1200px) {
+  .weeklyBlock, .mainBlock {
+    width: auto;
+    margin-top: 20px;
+  }
+
+  .adaptiveStyle {
+    display: block;
+  }
+
+  .search-form {
+    width: 50%;
+  }
+}
+
+@media (max-width: 480px) {
+  .mainBlock {
+    &-information {
+      font-size: 16px;
+    }
+
+    &-weatherWidget-item {
+      font-size: 12px;
+      line-height: 1.3;
+    }
+  }
 }
